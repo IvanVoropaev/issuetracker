@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html 	xmlns="http://www.w3.org/1999/xhtml" 
+		xmlns:th="http://www.thymeleaf.org" 
+		xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<meta charset="UTF-8"></meta>
+<title>Insert title here</title>
+</head>
+<body>
+Issue tracker
+	<table>
+		<tr th:each="issue : ${issues}">
+			<td><a href="#" th:href="@{'/issue/' + ${issue.id}}" th:text="${issue.issueName}">Issue name</a></td>
+			<td th:text="${issue.issueStatus}">Issue status</td>
+			<td th:text="${issue.issueDate}">Issue date</td>
+		</tr>
+	</table>
+	
+	<div sec:authorize="isAuthenticated()">
+		<small>Your name is: <span sec:authentication="name">Bob</span></small>
+		<a href="index.html" th:href="@{/logout}">Logout</a>
+		<form action="addissue">
+		    <button type="submit">Add issue</button>
+		</form>
+	</div>
+	
+	<div sec:authorize="isAnonymous()">
+		<form method="post" class="signin" th:action="@{/security_check}">
+			<div class="label">Email</div>
+			<div class="labeled">
+				<input id="username_or_email" name="j_username" type="text"/>
+			</div>
+			<div class="label">Password</div>
+			<div class="labeled">
+				<input id="password" name="j_password" type="password"/>
+			</div>
+			<input class="button" type="submit" value="Sign in" />  
+		</form>
+		<form action="registration">
+		    <button type="submit">Sign up</button>
+		</form>
+	</div>
+	
+	<table>
+		<tr th:each="user : ${users}">
+			<td th:text="${user.userName}">User name</td>
+			<td th:text="${user.userEmail}">User email</td>
+		</tr>
+	</table>
+</body>
+</html>
+

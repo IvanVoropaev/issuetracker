@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	  xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8"></meta>
+<title>Issue</title>
+</head>
+<body>
+	<div th:text="${issue.issueName}">Issue name</div>
+	<br/>
+	<table>
+		<tr>
+			<td>Status:</td>
+			<td th:text="${issue.issueStatus}">Issue status</td>
+		</tr>
+		<tr>
+			<td>Start date:</td>
+			<td th:text="${issue.issueDate}">Issue date</td>
+		</tr>
+		<tr>
+			<td>Author:</td>
+			<td th:text="${user.userName}">User name</td>
+		</tr>
+	</table>
+	<br/>
+	Description:
+	<div th:text="${issue.issueDescription}">Issue description</div>
+	<br/>
+	Comments:
+	<div th:each="comment : ${comments}">
+		<table>
+			<tr>
+				<td>Update by <div th:text="${comment.user.userName}"></div> <div th:text="${comment.commentDate}"></div>:</td>
+			</tr>
+			<tr>
+				<td>Status changed to: <div th:text="${comment.commentStatus}"></div></td>
+			</tr>
+			<tr>
+				<td th:text="${commentText}"></td>
+			</tr>
+		</table>
+	</div>
+	Add comment:
+	<form action="#" th:action="@{/addcomment}" th:object="${comment}">
+		
+	</form>
+</body>
+</html>

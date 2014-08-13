@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	  xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8"></meta>
+<title>Create issue</title>
+</head>
+<body>
+	Create issue
+	<form id="issuedata" action="#" th:action="@{/addissue}" th:object="${issue}" method="post">
+    	Name: <input type="text" th:field="*{issueName}" /><br/>
+    	Author: <input type="text" readonly="readonly" th:value="${user.userName}" /><br/>
+    	Description: <textarea th:field="*{issueDescription}"></textarea><br/>
+    	<input class="button" type="submit" value="Save" />  
+	</form>
+	<form action="#" th:action="@{/}">
+  		<input class="button" type="submit" value="Chancel" />
+  	</form>
+</body>
+</html>

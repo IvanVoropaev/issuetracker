@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.voropaev.issuetracker.mapper.IssueMapper">
+
+    <resultMap id="issueResult" type="com.voropaev.issuetracker.domain.Issue">
+        <id property="id" column="issue_id"/>
+        <result property="issueName" column="issue_name"/>
+        <result property="issueDate" column="issue_date"/>
+        <result property="issueStatus" column="issue_status"/>
+        <result property="issueDescription" column="issue_description"/>
+        <association property="user" column="user_id" javaType="com.voropaev.issuetracker.domain.User" select="com.voropaev.issuetracker.mapper.UserMapper.getUserById" />
+    </resultMap>
+
+    <insert id="addIssue" parameterType="Issue">
+        INSERT INTO issue (user_id,issue_name,issue_date,issue_status,issue_description)
+        VALUES (#{user.id},#{issueName},#{issueDate},#{issueStatus},#{issueDescription})
+    </insert>
+    
+    <select id="getAllIssue" resultMap="issueResult">  
+		SELECT * FROM issue; 
+	</select>
+	
+
+	<select id="getIssueById" parameterType="Integer" resultMap="issueResult">
+		SELECT *
+		FROM issue WHERE issue_id = #{id}
+	</select>
+	
+</mapper>
