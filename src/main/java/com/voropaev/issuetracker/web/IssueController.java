@@ -92,7 +92,6 @@ public class IssueController {
 		ModelAndView model = new ModelAndView();
 		
 		if(bindingResult.hasErrors()) {
-			//model.addObject("user", service.getUserByEmail(principal.getName()));	
 			model.setViewName("createissue");
 			return model;
 		}

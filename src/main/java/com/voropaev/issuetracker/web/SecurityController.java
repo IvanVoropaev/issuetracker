@@ -65,8 +65,6 @@ public class SecurityController {
 	public ModelAndView registration(@Valid User user, BindingResult bindingResult, HttpServletRequest request) {
 		
 		ModelAndView model = new ModelAndView();
-		System.out.println(user);
-		System.out.println(bindingResult);
 		
 		if (bindingResult.hasErrors()) {
 			model.setViewName("regtemplate");
@@ -76,8 +74,6 @@ public class SecurityController {
 		//проверка на наличие в базе данных пользователя с указанными в форме email-ом
 		if(!(service.getUserByEmail(user.getUserEmail())==null)) {
 			bindingResult.addError(new FieldError(bindingResult.getObjectName(), "userEmailError", "Specified email is already taken."));
-			System.out.println("email error");
-			System.out.println(bindingResult);
 			model.setViewName("regtemplate");
 			return model;
 		}
