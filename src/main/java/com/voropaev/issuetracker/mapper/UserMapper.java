@@ -1,14 +1,12 @@
 package com.voropaev.issuetracker.mapper;
 
-import java.util.List;
+import org.springframework.stereotype.Repository;
 
 import com.voropaev.issuetracker.domain.User;
 
+@Repository
 public interface UserMapper {
 	public void insertUser(User user);
-	public List<User> getAllUsers();
 	public User getUserById(Integer userId);
 	public User getUserByEmail(String email);
-	//public void updateUser(User user);
-	//public void deleteUser(Integer userId);
 }

@@ -3,14 +3,18 @@ package com.voropaev.issuetracker.domain;
 import java.io.Serializable;
 import java.util.Date;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 public class Issue implements Serializable {
 
 	private static final long serialVersionUID = -1049582422397680665L;
 	
 	private Integer id;
 	private Date issueDate;
+	@NotEmpty
 	private String issueName;
 	private String issueStatus;
+	@NotEmpty
 	private String issueDescription;
 	private User user;
 	
@@ -53,6 +57,6 @@ public class Issue implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Issue: [Date: " + issueDate + ". Name: " + issueName + ". Status: " + issueStatus + ".]";
+		return "Issue: [Id: " + id + ". Date: " + issueDate + ". Name: " + issueName + ". Status: " + issueStatus + ".]";
 	}
 }

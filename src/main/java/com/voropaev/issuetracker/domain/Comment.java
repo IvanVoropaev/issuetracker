@@ -3,6 +3,8 @@ package com.voropaev.issuetracker.domain;
 import java.io.Serializable;
 import java.util.Date;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 public class Comment implements Serializable {
 
 	private static final long serialVersionUID = 8007841197392187746L;
@@ -10,6 +12,7 @@ public class Comment implements Serializable {
 	private Integer id;
 	private Date commentDate;
 	private String commentStatus;
+	@NotEmpty
 	private String commentText;
 	private User user;
 	private Issue issue;
@@ -52,6 +55,6 @@ public class Comment implements Serializable {
 	}
 	@Override
 	public String toString() {
-		return "Comment: + [Date: " + commentDate + ". Text: " + commentText + ".]";
+		return "Comment: + [Id: " + id + ". Date: " + commentDate + ". Text: " + commentText + ".]";
 	}
 }

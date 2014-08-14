@@ -12,7 +12,7 @@
 		<form-login login-processing-url="/security_check"
 					login-page="/login.html"
 		            default-target-url="/"
-		            authentication-failure-url="/login-error.html" />
+		            authentication-failure-url="/login-error" />
 		<logout logout-url="/logout" />
 		<remember-me key="securityCheck" token-validity-seconds="86400"/>
 	</http>

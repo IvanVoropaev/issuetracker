@@ -6,7 +6,7 @@ CREATE TABLE comments(
     comment_date      DATETIME    NOT NULL,
     comment_status    TEXT        NOT NULL,
     comment_text      TEXT        NOT NULL,
-    PRIMARY KEY (comment_id, user_id, issue_id)
+    PRIMARY KEY (comment_id, issue_id)
 )
 ;
 
@@ -17,7 +17,7 @@ CREATE TABLE issue(
     issue_name           TEXT        NOT NULL,
     issue_description    TEXT        NOT NULL,
     issue_status         TEXT        NOT NULL,
-    PRIMARY KEY (issue_id, user_id)
+    PRIMARY KEY (issue_id)
 )
 ;
 
@@ -30,19 +30,27 @@ CREATE TABLE users(
 )
 ;
 
-ALTER TABLE comments ADD CONSTRAINT Refusers21 
+-- 
+-- TABLE: comments 
+--
+
+ALTER TABLE comments ADD CONSTRAINT Refusers91 
     FOREIGN KEY (user_id)
     REFERENCES users(user_id) ON DELETE RESTRICT ON UPDATE RESTRICT
 ;
 
-ALTER TABLE comments ADD CONSTRAINT Refissue31 
-    FOREIGN KEY (user_id, issue_id)
-    REFERENCES issue(issue_id, user_id) ON DELETE RESTRICT ON UPDATE RESTRICT
+ALTER TABLE comments ADD CONSTRAINT Refissue121 
+    FOREIGN KEY (issue_id)
+    REFERENCES issue(issue_id) ON DELETE RESTRICT ON UPDATE RESTRICT
 ;
 
-ALTER TABLE issue ADD CONSTRAINT Refusers11 
+
+-- 
+-- TABLE: issue 
+--
+
+ALTER TABLE issue ADD CONSTRAINT Refusers111 
     FOREIGN KEY (user_id)
     REFERENCES users(user_id) ON DELETE RESTRICT ON UPDATE RESTRICT
-;
 
 

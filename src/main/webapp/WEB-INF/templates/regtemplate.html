@@ -1,16 +1,70 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" 
-	  xmlns:th="http://www.thymeleaf.org" >
-<head>
-<meta charset="UTF-8"></meta>
-<title>Registration</title>
-</head>
-<body>
-	<form action="#" th:action="@{/registration}" th:object="${user}" method="post">
-		User name: <input type="text" th:field="*{userName}" /><br/>
-		User email: <input type="text" th:field="*{userEmail}" /><br/>
-		Password: <input type="password" th:field="*{password}" /><br/>
-		<input class="button" type="submit" value="Sign up" />
-	</form>
-</body>
+<html lang="en"
+		xmlns="http://www.w3.org/1999/xhtml" 
+		xmlns:th="http://www.thymeleaf.org" 
+		xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+	<head>
+		<meta charset="utf-8"/>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1"/>
+		<title>Register</title>
+
+		<!-- Bootstrap -->
+		<link href="css/bootstrap.min.css" th:href="@{/resources/css/bootstrap.min.css}" rel="stylesheet" />
+		<link href="css/bootstrap.min.css" th:href="@{/resources/css/issuetracker.css}" rel="stylesheet" />
+		
+	</head>
+	<body>
+		<div class="container">
+			<div class="bs-example">
+				<div class="panel panel-default">
+					<!-- Default panel contents -->
+					<div class="panel-heading">Register</div>
+					<div class="panel-body">
+						<form class="form-horizontal" action="#" th:action="@{/registration}" th:object="${user}" method="post">
+							<fieldset>
+								<div class="control-group">
+								<!-- Username -->
+									<label class="control-label"  for="username">Username</label>
+									<div class="controls">
+										<input type="text" th:field="*{userName}" class="input-xlarge"/>
+									<p class="help-block">Username must be between 3 and 20 characters long.</p>
+									<p class="error" th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}"></p>
+								</div>
+							</div>
+						 
+							<div class="control-group">
+								<!-- E-mail -->
+								<label class="control-label" for="email">E-mail</label>
+								<div class="controls">
+									<input type="text" th:field="*{userEmail}" class="input-xlarge"/>
+									<p class="help-block">Please provide your E-mail</p>
+									<p class="error" th:if="${#fields.hasErrors('userEmail')}" th:errors="*{userEmail}"></p>
+								</div>
+							</div>
+						 
+							<div class="control-group">
+								<!-- Password-->
+								<label class="control-label" for="password">Password</label>
+								<div class="controls">
+									<input type="password" th:field="*{password}" class="input-xlarge"/>
+									<p class="help-block">Password should be at least 4 characters</p>
+									<p class="error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
+								</div>
+							</div>
+						 
+							<div class="control-group">
+								<!-- Button -->
+								<div class="controls">
+									<button class="btn btn-success">Register</button>
+								</div>
+							</div>
+						  </fieldset>
+						</form>
+											
+					</div>  
+				</div>
+			</div>
+		</div>
+	</body>
 </html>

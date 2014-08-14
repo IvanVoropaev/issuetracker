@@ -418,3 +418,157 @@ SELECT
 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
 	at java.lang.Thread.run(Thread.java:744)
+08-13 23:16:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Синтаксическая ошибка в выражении SQL "ALTER TABLE COMMENTS ADD CONSTRAINT REFISSUE31 
+    FOREIGN KEY (USER_ID, ISSUE_ID)
+    REFERENCES ISSUE(ISSUE_ID) ON DELETE RESTRICT ON UPDATE RESTRICT
+    REFERENCES[*] USERS(USER_ID) ON DELETE RESTRICT ON UPDATE RESTRICT "
+Syntax error in SQL statement "ALTER TABLE COMMENTS ADD CONSTRAINT REFISSUE31 
+    FOREIGN KEY (USER_ID, ISSUE_ID)
+    REFERENCES ISSUE(ISSUE_ID) ON DELETE RESTRICT ON UPDATE RESTRICT
+    REFERENCES[*] USERS(USER_ID) ON DELETE RESTRICT ON UPDATE RESTRICT "; SQL statement:
+ALTER TABLE comments ADD CONSTRAINT Refissue31 
+    FOREIGN KEY (user_id, issue_id)
+    REFERENCES issue(issue_id) ON DELETE RESTRICT ON UPDATE RESTRICT
+    REFERENCES users(user_id) ON DELETE RESTRICT ON UPDATE RESTRICT [42000-181]
+08-13 23:18:01 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Таблица "COMMENTS" уже существует
+Table "COMMENTS" already exists; SQL statement:
+CREATE TABLE comments(
+    comment_id        INT         auto_increment NOT NULL,
+    user_id           INT         NOT NULL,
+    issue_id          INT         NOT NULL,
+    comment_date      DATETIME    NOT NULL,
+    comment_status    TEXT        NOT NULL,
+    comment_text      TEXT        NOT NULL,
+    PRIMARY KEY (comment_id, user_id, issue_id)
+) [42101-181]
+08-13 23:18:01 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Таблица "ISSUE" уже существует
+Table "ISSUE" already exists; SQL statement:
+CREATE TABLE issue(
+    issue_id             INT         auto_increment NOT NULL,
+    user_id              INT         NOT NULL,
+    issue_date           DATETIME    NOT NULL,
+    issue_name           TEXT        NOT NULL,
+    issue_description    TEXT        NOT NULL,
+    issue_status         TEXT        NOT NULL,
+    PRIMARY KEY (issue_id, user_id)
+) [42101-181]
+08-13 23:18:01 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Таблица "USERS" уже существует
+Table "USERS" already exists; SQL statement:
+CREATE TABLE users(
+    user_id       INT     auto_increment NOT NULL,
+    user_name     TEXT    NOT NULL,
+    user_email    TEXT    NOT NULL,
+    password      TEXT    NOT NULL,
+    PRIMARY KEY (user_id)
+) [42101-181]
+08-13 23:18:01 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Ограничение "REFUSERS21" уже существует
+Constraint "REFUSERS21" already exists; SQL statement:
+ALTER TABLE comments ADD CONSTRAINT Refusers21 
+    FOREIGN KEY (user_id)
+    REFERENCES users(user_id) ON DELETE RESTRICT ON UPDATE RESTRICT [90045-181]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.command.ddl.AlterTableAddConstraint.tryUpdate(AlterTableAddConstraint.java:98)
+	at org.h2.command.ddl.AlterTableAddConstraint.update(AlterTableAddConstraint.java:72)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:78)
+	at org.h2.command.Command.executeUpdate(Command.java:254)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:185)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:159)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1390)
+	at org.h2.server.web.WebApp.query(WebApp.java:1063)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1025)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1012)
+	at org.h2.server.web.WebThread.process(WebThread.java:167)
+	at org.h2.server.web.WebThread.run(WebThread.java:93)
+	at java.lang.Thread.run(Unknown Source)
+08-13 23:18:01 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Неверное количество столбцов
+Column count does not match; SQL statement:
+ALTER TABLE comments ADD CONSTRAINT Refissue31 
+    FOREIGN KEY (user_id, issue_id)
+    REFERENCES issue(issue_id) ON DELETE RESTRICT ON UPDATE RESTRICT [21002-181]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.message.DbException.get(DbException.java:144)
+	at org.h2.command.ddl.AlterTableAddConstraint.tryUpdate(AlterTableAddConstraint.java:223)
+	at org.h2.command.ddl.AlterTableAddConstraint.update(AlterTableAddConstraint.java:72)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:78)
+	at org.h2.command.Command.executeUpdate(Command.java:254)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:185)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:159)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1390)
+	at org.h2.server.web.WebApp.query(WebApp.java:1063)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1025)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1012)
+	at org.h2.server.web.WebThread.process(WebThread.java:167)
+	at org.h2.server.web.WebThread.run(WebThread.java:93)
+	at java.lang.Thread.run(Unknown Source)
+08-13 23:18:01 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Ограничение "REFUSERS11" уже существует
+Constraint "REFUSERS11" already exists; SQL statement:
+ALTER TABLE issue ADD CONSTRAINT Refusers11 
+    FOREIGN KEY (user_id)
+    REFERENCES users(user_id) ON DELETE RESTRICT ON UPDATE RESTRICT [90045-181]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.command.ddl.AlterTableAddConstraint.tryUpdate(AlterTableAddConstraint.java:98)
+	at org.h2.command.ddl.AlterTableAddConstraint.update(AlterTableAddConstraint.java:72)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:78)
+	at org.h2.command.Command.executeUpdate(Command.java:254)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:185)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:159)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1390)
+	at org.h2.server.web.WebApp.query(WebApp.java:1063)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1025)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1012)
+	at org.h2.server.web.WebThread.process(WebThread.java:167)
+	at org.h2.server.web.WebThread.run(WebThread.java:93)
+	at java.lang.Thread.run(Unknown Source)
+08-13 23:18:33 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Синтаксическая ошибка в выражении SQL "DROP YABLE[*] USERS "; ожидалось "TABLE, INDEX, USER, SEQUENCE, CONSTANT, TRIGGER, VIEW, ROLE, ALIAS, SCHEMA, ALL, DOMAIN, TYPE, DATATYPE, AGGREGATE"
+Syntax error in SQL statement "DROP YABLE[*] USERS "; expected "TABLE, INDEX, USER, SEQUENCE, CONSTANT, TRIGGER, VIEW, ROLE, ALIAS, SCHEMA, ALL, DOMAIN, TYPE, DATATYPE, AGGREGATE"; SQL statement:
+drop yable users [42001-181]
+08-13 23:18:38 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Таблица "COMMENTS" не найдена
+Table "COMMENTS" not found; SQL statement:
+drop table comments [42102-181]
+08-13 23:18:38 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Таблица "ISSUE" не найдена
+Table "ISSUE" not found; SQL statement:
+drop table issue [42102-181]
+08-13 23:38:54 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Синтаксическая ошибка в выражении SQL "DROP TSBLE[*] ISSUE "; ожидалось "TABLE, INDEX, USER, SEQUENCE, CONSTANT, TRIGGER, VIEW, ROLE, ALIAS, SCHEMA, ALL, DOMAIN, TYPE, DATATYPE, AGGREGATE"
+Syntax error in SQL statement "DROP TSBLE[*] ISSUE "; expected "TABLE, INDEX, USER, SEQUENCE, CONSTANT, TRIGGER, VIEW, ROLE, ALIAS, SCHEMA, ALL, DOMAIN, TYPE, DATATYPE, AGGREGATE"; SQL statement:
+drop tsble issue [42001-181]
+08-13 23:39:13 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Таблица "USERS" не найдена
+Table "USERS" not found; SQL statement:
+drop table users [42102-181]
+08-13 23:39:13 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Таблица "COMMENTS" не найдена
+Table "COMMENTS" not found; SQL statement:
+drop table comments [42102-181]
+08-14 00:05:26 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Синтаксическая ошибка в выражении SQL "SELECT * COMMENTS[*] "
+Syntax error in SQL statement "SELECT * COMMENTS[*] "; SQL statement:
+select * comments [42000-181]
+08-14 20:21:32 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Таблица "COMMENT" не найдена
+Table "COMMENT" not found; SQL statement:
+select * from comment [42102-181]
+08-14 20:24:01 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Таблица "USER" не найдена
+Table "USER" not found; SQL statement:
+select * from user [42102-181]
+08-14 20:25:35 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Таблица "COMMENS" не найдена
+Table "COMMENS" not found; SQL statement:
+select * from commens [42102-181]

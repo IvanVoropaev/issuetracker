@@ -22,10 +22,15 @@
 		SELECT * FROM issue; 
 	</select>
 	
-
 	<select id="getIssueById" parameterType="Integer" resultMap="issueResult">
 		SELECT *
 		FROM issue WHERE issue_id = #{id}
 	</select>
+	
+	<update id="updateIssueStatus" parameterType="Issue">
+		UPDATE issue
+		SET issue_status = #{issueStatus}
+		WHERE issue_id = #{id}
+	</update>
 	
 </mapper>

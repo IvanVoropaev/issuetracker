@@ -11,25 +11,11 @@
         <result property="password" column="password"/>
         <collection property="issues" ofType="com.voropaev.issuetracker.domain.Issue" column="user_id"/>
     </resultMap>
-    
-    <!-- 
-    <resultMap type="Issue" id="issueResult">
-    	<id property="id" column="issue_id"/>
-    	<result property="issueName" column="issue_name"/>
-    	<result property="issueDate" column="issue_date"/>
-    	<result property="issueStatus" column="issue_status"/>
-    	<result property="issueDescription" column="issue_description"/>
-    </resultMap>
-    -->
-    
+        
     <insert id="insertUser" parameterType="User">
         INSERT INTO users (user_name,user_email,password)
         VALUES (#{userName},#{userEmail},#{password})
     </insert>
-    
-    <select id="getAllUsers" resultMap="userResult">  
-		SELECT * FROM users; 
-	</select>
 	
 	<select id="getUserById" parameterType="Integer" resultType="com.voropaev.issuetracker.domain.User">
 		SELECT 

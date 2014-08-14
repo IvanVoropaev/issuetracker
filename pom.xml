@@ -98,6 +98,12 @@
 			  <artifactId>validation-api</artifactId>
 			  <version>${javax.validation-version}</version>
 		</dependency>
+		
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>4.0.2.GA</version>
+		</dependency>
 				
 		<!-- AspectJ -->
 		<dependency>
@@ -193,7 +199,7 @@
 			<artifactId>h2</artifactId>
 			<version>${com.h2database-version}</version>
 		</dependency>
-	
+		
 		<!-- Test -->
 		<dependency>
 			<groupId>junit</groupId>

@@ -28,10 +28,6 @@ public class IssueTrackerServiceImpl implements IssueTrackerService {
 		userMapper.insertUser(user);
 	}
 
-	public List<User> getAllUsers() {
-		return userMapper.getAllUsers();
-	}
-
 	public User getUserById(Integer userId) {
 		return userMapper.getUserById(userId);
 	}
@@ -58,6 +54,10 @@ public class IssueTrackerServiceImpl implements IssueTrackerService {
 
 	public List<Comment> getCommentsByIssueId(Integer issueId) {
 		return commentMapper.getCommentsByIssueId(issueId);
+	}
+
+	public void updateIssueStatus(Issue issue) {
+		issueMapper.updateIssueStatus(issue);
 	}
 
 }
