@@ -1,5 +1,5 @@
 
-CREATE TABLE comments(
+CREATE TABLE IF NOT EXISTS comments(
     comment_id        INT         auto_increment NOT NULL,
     user_id           INT         NOT NULL,
     issue_id          INT         NOT NULL,
@@ -10,7 +10,7 @@ CREATE TABLE comments(
 )
 ;
 
-CREATE TABLE issue(
+CREATE TABLE IF NOT EXISTS issue(
     issue_id             INT         auto_increment NOT NULL,
     user_id              INT         NOT NULL,
     issue_date           DATETIME    NOT NULL,
@@ -21,7 +21,7 @@ CREATE TABLE issue(
 )
 ;
 
-CREATE TABLE users(
+CREATE TABLE IF NOT EXISTS users(
     user_id       INT     auto_increment NOT NULL,
     user_name     TEXT    NOT NULL,
     user_email    TEXT    NOT NULL,
@@ -30,26 +30,17 @@ CREATE TABLE users(
 )
 ;
 
--- 
--- TABLE: comments 
---
-
-ALTER TABLE comments ADD CONSTRAINT Refusers91 
+ALTER TABLE comments ADD CONSTRAINT IF NOT EXISTS Refusers91 
     FOREIGN KEY (user_id)
     REFERENCES users(user_id) ON DELETE RESTRICT ON UPDATE RESTRICT
 ;
 
-ALTER TABLE comments ADD CONSTRAINT Refissue121 
+ALTER TABLE comments ADD CONSTRAINT IF NOT EXISTS Refissue121 
     FOREIGN KEY (issue_id)
     REFERENCES issue(issue_id) ON DELETE RESTRICT ON UPDATE RESTRICT
 ;
 
-
--- 
--- TABLE: issue 
---
-
-ALTER TABLE issue ADD CONSTRAINT Refusers111 
+ALTER TABLE issue ADD CONSTRAINT IF NOT EXISTS Refusers111 
     FOREIGN KEY (user_id)
     REFERENCES users(user_id) ON DELETE RESTRICT ON UPDATE RESTRICT
 
