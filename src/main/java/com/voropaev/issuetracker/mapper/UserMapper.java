@@ -1,7 +1,5 @@
 package com.voropaev.issuetracker.mapper;
 
-import org.springframework.stereotype.Repository;
-
 import com.voropaev.issuetracker.domain.User;
 
 /**
@@ -11,7 +9,7 @@ import com.voropaev.issuetracker.domain.User;
  *<p>Маппер для объекта - сущности User</p>
  *
  */
-@Repository(value="userMapper")
+
 public interface UserMapper {
 	/**
 	 *<p>Добавление нового пользователя</p>

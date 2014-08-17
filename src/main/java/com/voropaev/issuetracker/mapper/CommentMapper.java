@@ -2,8 +2,6 @@ package com.voropaev.issuetracker.mapper;
 
 import java.util.List;
 
-import org.springframework.stereotype.Repository;
-
 import com.voropaev.issuetracker.domain.Comment;
 
 /**
@@ -13,7 +11,7 @@ import com.voropaev.issuetracker.domain.Comment;
  *<p>Маппер для объекта - сущности Comment</p>
  *
  */
-@Repository(value="commentMapper")
+
 public interface CommentMapper {
 	/**
 	 *<p>Добавление комментария</p>
