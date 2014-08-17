@@ -31,5 +31,4 @@ public interface UserMapper {
 	 *@param email email пользователя
 	 */
 	public User getUserByEmail(String email);
-	public void deleteUser(Integer id);
 }

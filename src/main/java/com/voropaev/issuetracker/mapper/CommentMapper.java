@@ -27,10 +27,4 @@ public interface CommentMapper {
 	 *@param issueId идентификатор отчета
 	 */
 	public List<Comment> getCommentsByIssueId(Integer issueId);
-	/**
-	 *<p>Удаление комментария</p>
-	 *
-	 *@param comment комментарий
-	 */
-	public void deleteComment(Comment comment);
 }

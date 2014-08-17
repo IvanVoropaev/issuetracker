@@ -37,5 +37,4 @@ public interface IssueMapper {
 	 *@param issue מעקוע
 	 */
 	public void updateIssueStatus(Issue issue);
-	public void deleteIssue(Integer id);
 }

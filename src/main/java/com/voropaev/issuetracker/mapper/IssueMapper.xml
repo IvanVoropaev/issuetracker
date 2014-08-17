@@ -33,8 +33,4 @@
 		WHERE issue_id = #{id}
 	</update>
 	
-	<delete id="deleteIssue" parameterType="Integer">
-    	DELETE FROM issue WHERE issue_id=#{id}
-    </delete>
-	
 </mapper>

@@ -15,9 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class ErrorController {
 	
 	/**
-	 * 
 	 *<p>Обработка ошибки 404.</p>
-	 *
 	 */
 	@RequestMapping(value = "/page-not-found")
 	public ModelAndView pageNotFound() {
@@ -28,9 +26,7 @@ public class ErrorController {
 	}
 	
 	/**
-	 * 
 	 *<p>Обработка исключений.</p>
-	 *
 	 */
 	@RequestMapping(value = "/uncaught-error")
 	public ModelAndView uncaughtError() {
