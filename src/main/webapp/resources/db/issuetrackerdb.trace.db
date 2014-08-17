@@ -1,0 +1,306 @@
+08-15 12:03:21 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Синтаксическая ошибка в выражении SQL "IF[*] NOT EXISTS CREATE TABLE COMMENTS(
+    COMMENT_ID        INT         AUTO_INCREMENT NOT NULL,
+    USER_ID           INT         NOT NULL,
+    ISSUE_ID          INT         NOT NULL,
+    COMMENT_DATE      DATETIME    NOT NULL,
+    COMMENT_STATUS    TEXT        NOT NULL,
+    COMMENT_TEXT      TEXT        NOT NULL,
+    PRIMARY KEY (COMMENT_ID, ISSUE_ID)
+) "; ожидалось "INSERT, {"
+Syntax error in SQL statement "IF[*] NOT EXISTS CREATE TABLE COMMENTS(
+    COMMENT_ID        INT         AUTO_INCREMENT NOT NULL,
+    USER_ID           INT         NOT NULL,
+    ISSUE_ID          INT         NOT NULL,
+    COMMENT_DATE      DATETIME    NOT NULL,
+    COMMENT_STATUS    TEXT        NOT NULL,
+    COMMENT_TEXT      TEXT        NOT NULL,
+    PRIMARY KEY (COMMENT_ID, ISSUE_ID)
+) "; expected "INSERT, {"; SQL statement:
+IF NOT EXISTS CREATE TABLE comments(
+    comment_id        INT         auto_increment NOT NULL,
+    user_id           INT         NOT NULL,
+    issue_id          INT         NOT NULL,
+    comment_date      DATETIME    NOT NULL,
+    comment_status    TEXT        NOT NULL,
+    comment_text      TEXT        NOT NULL,
+    PRIMARY KEY (comment_id, issue_id)
+) [42001-181]
+08-15 12:03:21 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Синтаксическая ошибка в выражении SQL "IF[*] NOT EXISTS CREATE TABLE ISSUE(
+    ISSUE_ID             INT         AUTO_INCREMENT NOT NULL,
+    USER_ID              INT         NOT NULL,
+    ISSUE_DATE           DATETIME    NOT NULL,
+    ISSUE_NAME           TEXT        NOT NULL,
+    ISSUE_DESCRIPTION    TEXT        NOT NULL,
+    ISSUE_STATUS         TEXT        NOT NULL,
+    PRIMARY KEY (ISSUE_ID)
+) "; ожидалось "INSERT, {"
+Syntax error in SQL statement "IF[*] NOT EXISTS CREATE TABLE ISSUE(
+    ISSUE_ID             INT         AUTO_INCREMENT NOT NULL,
+    USER_ID              INT         NOT NULL,
+    ISSUE_DATE           DATETIME    NOT NULL,
+    ISSUE_NAME           TEXT        NOT NULL,
+    ISSUE_DESCRIPTION    TEXT        NOT NULL,
+    ISSUE_STATUS         TEXT        NOT NULL,
+    PRIMARY KEY (ISSUE_ID)
+) "; expected "INSERT, {"; SQL statement:
+IF NOT EXISTS CREATE TABLE issue(
+    issue_id             INT         auto_increment NOT NULL,
+    user_id              INT         NOT NULL,
+    issue_date           DATETIME    NOT NULL,
+    issue_name           TEXT        NOT NULL,
+    issue_description    TEXT        NOT NULL,
+    issue_status         TEXT        NOT NULL,
+    PRIMARY KEY (issue_id)
+) [42001-181]
+08-15 12:03:21 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Синтаксическая ошибка в выражении SQL "IF[*] NOT EXISTS CREATE TABLE USERS(
+    USER_ID       INT     AUTO_INCREMENT NOT NULL,
+    USER_NAME     TEXT    NOT NULL,
+    USER_EMAIL    TEXT    NOT NULL,
+    PASSWORD      TEXT    NOT NULL,
+    PRIMARY KEY (USER_ID)
+) "; ожидалось "INSERT, {"
+Syntax error in SQL statement "IF[*] NOT EXISTS CREATE TABLE USERS(
+    USER_ID       INT     AUTO_INCREMENT NOT NULL,
+    USER_NAME     TEXT    NOT NULL,
+    USER_EMAIL    TEXT    NOT NULL,
+    PASSWORD      TEXT    NOT NULL,
+    PRIMARY KEY (USER_ID)
+) "; expected "INSERT, {"; SQL statement:
+IF NOT EXISTS CREATE TABLE users(
+    user_id       INT     auto_increment NOT NULL,
+    user_name     TEXT    NOT NULL,
+    user_email    TEXT    NOT NULL,
+    password      TEXT    NOT NULL,
+    PRIMARY KEY (user_id)
+) [42001-181]
+08-15 12:03:21 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Таблица "COMMENTS" не найдена
+Table "COMMENTS" not found; SQL statement:
+-- 
+-- TABLE: comments 
+--
+
+ALTER TABLE comments ADD CONSTRAINT Refusers91 
+    FOREIGN KEY (user_id)
+    REFERENCES users(user_id) ON DELETE RESTRICT ON UPDATE RESTRICT [42102-181]
+08-15 12:03:21 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Таблица "COMMENTS" не найдена
+Table "COMMENTS" not found; SQL statement:
+ALTER TABLE comments ADD CONSTRAINT Refissue121 
+    FOREIGN KEY (issue_id)
+    REFERENCES issue(issue_id) ON DELETE RESTRICT ON UPDATE RESTRICT [42102-181]
+08-15 12:03:21 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Таблица "ISSUE" не найдена
+Table "ISSUE" not found; SQL statement:
+-- 
+-- TABLE: issue 
+--
+
+ALTER TABLE issue ADD CONSTRAINT Refusers111 
+    FOREIGN KEY (user_id)
+    REFERENCES users(user_id) ON DELETE RESTRICT ON UPDATE RESTRICT [42102-181]
+08-15 12:05:16 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Таблица "IF" не найдена
+Table "IF" not found; SQL statement:
+-- 
+-- TABLE: comments 
+--
+
+ALTER TABLE IF NOT EXISTS comments ADD CONSTRAINT Refusers91 
+    FOREIGN KEY (user_id)
+    REFERENCES users(user_id) ON DELETE RESTRICT ON UPDATE RESTRICT [42102-181]
+08-15 12:05:16 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Таблица "IF" не найдена
+Table "IF" not found; SQL statement:
+ALTER TABLE IF NOT EXISTS comments ADD CONSTRAINT Refissue121 
+    FOREIGN KEY (issue_id)
+    REFERENCES issue(issue_id) ON DELETE RESTRICT ON UPDATE RESTRICT [42102-181]
+08-15 12:05:16 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Таблица "IF" не найдена
+Table "IF" not found; SQL statement:
+-- 
+-- TABLE: issue 
+--
+
+ALTER TABLE IF NOT EXISTS issue ADD CONSTRAINT Refusers111 
+    FOREIGN KEY (user_id)
+    REFERENCES users(user_id) ON DELETE RESTRICT ON UPDATE RESTRICT [42102-181]
+08-15 12:05:38 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Ограничение "REFUSERS91" уже существует
+Constraint "REFUSERS91" already exists; SQL statement:
+ALTER TABLE comments ADD CONSTRAINT Refusers91 
+    FOREIGN KEY (user_id)
+    REFERENCES users(user_id) ON DELETE RESTRICT ON UPDATE RESTRICT [90045-181]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.command.ddl.AlterTableAddConstraint.tryUpdate(AlterTableAddConstraint.java:98)
+	at org.h2.command.ddl.AlterTableAddConstraint.update(AlterTableAddConstraint.java:72)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:78)
+	at org.h2.command.Command.executeUpdate(Command.java:254)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:185)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:159)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1390)
+	at org.h2.server.web.WebApp.query(WebApp.java:1063)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1025)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1012)
+	at org.h2.server.web.WebThread.process(WebThread.java:167)
+	at org.h2.server.web.WebThread.run(WebThread.java:93)
+	at java.lang.Thread.run(Unknown Source)
+08-15 12:05:38 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Ограничение "REFISSUE121" уже существует
+Constraint "REFISSUE121" already exists; SQL statement:
+ALTER TABLE comments ADD CONSTRAINT Refissue121 
+    FOREIGN KEY (issue_id)
+    REFERENCES issue(issue_id) ON DELETE RESTRICT ON UPDATE RESTRICT [90045-181]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.command.ddl.AlterTableAddConstraint.tryUpdate(AlterTableAddConstraint.java:98)
+	at org.h2.command.ddl.AlterTableAddConstraint.update(AlterTableAddConstraint.java:72)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:78)
+	at org.h2.command.Command.executeUpdate(Command.java:254)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:185)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:159)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1390)
+	at org.h2.server.web.WebApp.query(WebApp.java:1063)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1025)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1012)
+	at org.h2.server.web.WebThread.process(WebThread.java:167)
+	at org.h2.server.web.WebThread.run(WebThread.java:93)
+	at java.lang.Thread.run(Unknown Source)
+08-15 12:05:38 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Ограничение "REFUSERS111" уже существует
+Constraint "REFUSERS111" already exists; SQL statement:
+-- 
+-- TABLE: issue 
+--
+
+ALTER TABLE issue ADD CONSTRAINT Refusers111 
+    FOREIGN KEY (user_id)
+    REFERENCES users(user_id) ON DELETE RESTRICT ON UPDATE RESTRICT [90045-181]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.command.ddl.AlterTableAddConstraint.tryUpdate(AlterTableAddConstraint.java:98)
+	at org.h2.command.ddl.AlterTableAddConstraint.update(AlterTableAddConstraint.java:72)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:78)
+	at org.h2.command.Command.executeUpdate(Command.java:254)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:185)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:159)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1390)
+	at org.h2.server.web.WebApp.query(WebApp.java:1063)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1025)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1012)
+	at org.h2.server.web.WebThread.process(WebThread.java:167)
+	at org.h2.server.web.WebThread.run(WebThread.java:93)
+	at java.lang.Thread.run(Unknown Source)
+08-15 12:05:57 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Синтаксическая ошибка в выражении SQL "ALTER TABLE COMMENTS ADD CONSTRAINT IF NOT EXIST[*] REFUSERS91 
+    FOREIGN KEY (USER_ID)
+    REFERENCES USERS(USER_ID) ON DELETE RESTRICT ON UPDATE RESTRICT "; ожидалось "EXISTS"
+Syntax error in SQL statement "ALTER TABLE COMMENTS ADD CONSTRAINT IF NOT EXIST[*] REFUSERS91 
+    FOREIGN KEY (USER_ID)
+    REFERENCES USERS(USER_ID) ON DELETE RESTRICT ON UPDATE RESTRICT "; expected "EXISTS"; SQL statement:
+ALTER TABLE comments ADD CONSTRAINT IF NOT EXIST Refusers91 
+    FOREIGN KEY (user_id)
+    REFERENCES users(user_id) ON DELETE RESTRICT ON UPDATE RESTRICT [42001-181]
+08-15 12:05:57 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Ограничение "REFISSUE121" уже существует
+Constraint "REFISSUE121" already exists; SQL statement:
+ALTER TABLE comments ADD CONSTRAINT Refissue121 
+    FOREIGN KEY (issue_id)
+    REFERENCES issue(issue_id) ON DELETE RESTRICT ON UPDATE RESTRICT [90045-181]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.command.ddl.AlterTableAddConstraint.tryUpdate(AlterTableAddConstraint.java:98)
+	at org.h2.command.ddl.AlterTableAddConstraint.update(AlterTableAddConstraint.java:72)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:78)
+	at org.h2.command.Command.executeUpdate(Command.java:254)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:185)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:159)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1390)
+	at org.h2.server.web.WebApp.query(WebApp.java:1063)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1025)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1012)
+	at org.h2.server.web.WebThread.process(WebThread.java:167)
+	at org.h2.server.web.WebThread.run(WebThread.java:93)
+	at java.lang.Thread.run(Unknown Source)
+08-15 12:05:57 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Ограничение "REFUSERS111" уже существует
+Constraint "REFUSERS111" already exists; SQL statement:
+-- 
+-- TABLE: issue 
+--
+
+ALTER TABLE issue ADD CONSTRAINT Refusers111 
+    FOREIGN KEY (user_id)
+    REFERENCES users(user_id) ON DELETE RESTRICT ON UPDATE RESTRICT [90045-181]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.command.ddl.AlterTableAddConstraint.tryUpdate(AlterTableAddConstraint.java:98)
+	at org.h2.command.ddl.AlterTableAddConstraint.update(AlterTableAddConstraint.java:72)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:78)
+	at org.h2.command.Command.executeUpdate(Command.java:254)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:185)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:159)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1390)
+	at org.h2.server.web.WebApp.query(WebApp.java:1063)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1025)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1012)
+	at org.h2.server.web.WebThread.process(WebThread.java:167)
+	at org.h2.server.web.WebThread.run(WebThread.java:93)
+	at java.lang.Thread.run(Unknown Source)
+08-15 12:06:19 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Ограничение "REFISSUE121" уже существует
+Constraint "REFISSUE121" already exists; SQL statement:
+ALTER TABLE comments ADD CONSTRAINT Refissue121 
+    FOREIGN KEY (issue_id)
+    REFERENCES issue(issue_id) ON DELETE RESTRICT ON UPDATE RESTRICT [90045-181]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.command.ddl.AlterTableAddConstraint.tryUpdate(AlterTableAddConstraint.java:98)
+	at org.h2.command.ddl.AlterTableAddConstraint.update(AlterTableAddConstraint.java:72)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:78)
+	at org.h2.command.Command.executeUpdate(Command.java:254)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:185)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:159)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1390)
+	at org.h2.server.web.WebApp.query(WebApp.java:1063)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1025)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1012)
+	at org.h2.server.web.WebThread.process(WebThread.java:167)
+	at org.h2.server.web.WebThread.run(WebThread.java:93)
+	at java.lang.Thread.run(Unknown Source)
+08-15 12:06:19 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Ограничение "REFUSERS111" уже существует
+Constraint "REFUSERS111" already exists; SQL statement:
+-- 
+-- TABLE: issue 
+--
+
+ALTER TABLE issue ADD CONSTRAINT Refusers111 
+    FOREIGN KEY (user_id)
+    REFERENCES users(user_id) ON DELETE RESTRICT ON UPDATE RESTRICT [90045-181]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.command.ddl.AlterTableAddConstraint.tryUpdate(AlterTableAddConstraint.java:98)
+	at org.h2.command.ddl.AlterTableAddConstraint.update(AlterTableAddConstraint.java:72)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:78)
+	at org.h2.command.Command.executeUpdate(Command.java:254)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:185)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:159)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1390)
+	at org.h2.server.web.WebApp.query(WebApp.java:1063)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1025)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1012)
+	at org.h2.server.web.WebThread.process(WebThread.java:167)
+	at org.h2.server.web.WebThread.run(WebThread.java:93)
+	at java.lang.Thread.run(Unknown Source)

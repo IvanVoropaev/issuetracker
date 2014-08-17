@@ -10,17 +10,17 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-import com.voropaev.issuetracker.mapper.UserMapper;
+import com.voropaev.issuetracker.service.IssueTrackerServiceImpl;
 
 public class IssueTrackerUserDetailsService implements UserDetailsService {
 	
 	@Autowired
-	private UserMapper userMapper;
+	private IssueTrackerServiceImpl sevice;
 
 	@Override
 	public UserDetails loadUserByUsername(String email)
 			throws UsernameNotFoundException, DataAccessException {
-		com.voropaev.issuetracker.domain.User userEntity = userMapper.getUserByEmail(email);
+		com.voropaev.issuetracker.domain.User userEntity = sevice.getUserByEmail(email);
 		System.out.println(userEntity);
 		if (userEntity == null) {
 			System.out.println("Error");

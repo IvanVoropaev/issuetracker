@@ -5,12 +5,18 @@ import java.util.Date;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
+/**
+ * @author Ivan Voropaev
+ * 
+ * <p>Объект - сущность для таблицы comments.</p>.
+ */
 public class Comment implements Serializable {
 
 	private static final long serialVersionUID = 8007841197392187746L;
 	
 	private Integer id;
 	private Date commentDate;
+	@NotEmpty
 	private String commentStatus;
 	@NotEmpty
 	private String commentText;

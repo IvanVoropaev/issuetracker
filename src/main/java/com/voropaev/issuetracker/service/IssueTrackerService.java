@@ -6,6 +6,13 @@ import com.voropaev.issuetracker.domain.Comment;
 import com.voropaev.issuetracker.domain.Issue;
 import com.voropaev.issuetracker.domain.User;
 
+/**
+ * 
+ * @author Ivan Voropaev
+ * 
+ *<p>Сервисный слой приложения.</p>
+ *
+ */
 public interface IssueTrackerService {
 
 	public void insertUser(User user);
@@ -17,4 +24,5 @@ public interface IssueTrackerService {
 	public void addComment(Comment comment);
 	public List<Comment> getCommentsByIssueId(Integer issueId);
 	public void updateIssueStatus(Issue issue);
+	
 }

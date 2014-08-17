@@ -33,5 +33,8 @@
 			   password as "password"	 
 		FROM users WHERE user_email = #{userEmail}
 	</select>
-
+	
+	<delete id="deleteUser" parameterType="Integer">
+    	DELETE FROM users WHERE user_id=#{id}
+    </delete>
 </mapper>

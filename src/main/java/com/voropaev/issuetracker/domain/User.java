@@ -8,12 +8,16 @@ import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
+/**
+ * @author Ivan Voropaev
+ * 
+ * <p>Объект - сущность для таблицы users.</p>.
+ */
 public class User implements Serializable {
 	
 	private static final long serialVersionUID = -3663290383064782272L;
 	
 	private Integer id;
-	
 	@NotEmpty
 	@Size(min=3, max=30, message="Username must be between 3 and 20 characters long.")
 	private String userName;
@@ -23,7 +27,6 @@ public class User implements Serializable {
 	@NotEmpty
 	@Size(min=4, max=20, message="The password must be at least 4 characters long.")
 	private String password;
-	
 	private List<Issue> issues;
 	private List<Comment> comments;
 	

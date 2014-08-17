@@ -22,5 +22,9 @@
     	SELECT *
     	FROM comments WHERE issue_id = #{issueId}
     </select>
+    
+    <delete id="deleteComment" parameterType="com.voropaev.issuetracker.domain.Comment">
+    	DELETE FROM comments WHERE comments_id=#{comment.id}
+    </delete>
 
 </mapper>

@@ -1,0 +1,87 @@
+<!-- Главная страница -->
+<!DOCTYPE html>
+<html 	lang="en"
+		xmlns="http://www.w3.org/1999/xhtml" 
+		xmlns:th="http://www.thymeleaf.org" 
+		xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Issue tracker</title>
+    <!-- подключение  bootstrap -->
+    <link href="css/bootstrap.min.css" th:href="@{/resources/css/bootstrap.min.css}" rel="stylesheet" />
+    <link href="/resources/css/issuetracker.css" th:href="@{/resources/css/issuetracker.css}" rel="stylesheet" />
+  </head>
+  <body>
+	<div class="container">
+	<div class="bs-example">
+    <div class="panel panel-default">
+		<div class="panel-heading">Issue tracker</div>
+		<div class="panel-body">
+		
+			<!-- форма для авторизации пользователя с использованием Spring security -->
+			<form class="form-inline" method="post" th:action="@{/security_check}">
+			
+				<!-- сообщение появляется при ошибке авторизации -->
+				<div sec:authorize="isAnonymous()" class="error">
+					<span th:text="${message}"></span>
+				</div>
+				
+				<!-- сообщение с email-ом пользователя и предложением разлогиниться, появляется только если пользователь авторизирован -->
+				<div sec:authorize="isAuthenticated()">
+					<small>User: <span sec:authentication="name">Bob</span>
+					<a href="index.html" th:href="@{/logout}">Logout</a></small>
+				</div>
+				
+				<!-- поля для авторизации, видны только неавторизированным пользователям -->
+				<div sec:authorize="isAnonymous()">
+					<div class="form-group">
+						<label class="sr-only" for="username_or_email">Email address</label>
+						<input id="username_or_email" name="j_username" type="text" class="form-control" placeholder="Enter email" />
+					</div>
+					<div class="form-group">
+						<label class="sr-only" for="password">Password</label>
+						<input id="password" name="j_password" type="password" class="form-control" placeholder="Password" />
+					</div>
+					<button type="submit" class="btn btn-default">Sign in</button>
+				</div>
+			</form>
+			
+		</div>
+
+		<!-- Таблица со списком всех сообщений трекера -->
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Status</th>
+					<th>Start date</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="issue : ${issues}">
+					<td><a href="#" th:href="@{'/issue/' + ${issue.id}}" th:text="${issue.issueName}">Issue name</a></td>
+					<td th:text="${issue.issueStatus}">Issue status</td>
+					<td th:text="${#calendars.format(issue.issueDate,'dd/MM/yyyy')}">Issue date</td>
+				</tr>
+			</tbody>
+		</table>
+	  	
+	  	<!-- Если пользователь авторизирован - появляется кнопка для добавления нового сообщения об ошибке -->
+		<div sec:authorize="isAuthenticated()" class="panel-body">
+			<form action="addissue">
+				<button type="submit" class="btn btn-default">Add issue</button>
+			</form>
+		</div>
+		
+		<!-- Если пользователь не авторизирован - появляется предложение пройти регистрацию -->
+		<div sec:authorize="isAnonymous()"  class="panel-body">
+			<a href="#" th:href="@{/registration}">Sign up</a> for adding issues and leave comments
+		</div>
+	  
+    </div>
+  </div>
+  </div>
+  </body>
+</html>

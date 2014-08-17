@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+    PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	<settings>
+		<!-- changes from the defaults -->
+		<setting name="lazyLoadingEnabled" value="false" />
+	</settings>
+	<typeAliases>
+		<typeAlias type="com.voropaev.issuetracker.domain.User" alias="user"/>
+		<typeAlias type="com.voropaev.issuetracker.domain.Issue" alias="issue"/>
+		<typeAlias type="com.voropaev.issuetracker.domain.Comment" alias="comment"/>
+	</typeAliases>
+</configuration>

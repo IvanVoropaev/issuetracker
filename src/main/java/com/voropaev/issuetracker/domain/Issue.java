@@ -2,9 +2,14 @@ package com.voropaev.issuetracker.domain;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import org.hibernate.validator.constraints.NotEmpty;
-
+/**
+ * @author Ivan Voropaev
+ * 
+ * <p>Объект - сущность для таблицы issue.</p>.
+ */
 public class Issue implements Serializable {
 
 	private static final long serialVersionUID = -1049582422397680665L;
@@ -17,6 +22,7 @@ public class Issue implements Serializable {
 	@NotEmpty
 	private String issueDescription;
 	private User user;
+	private List<Comment> comments;
 	
 	public Integer getId() {
 		return id;
@@ -54,7 +60,12 @@ public class Issue implements Serializable {
 	public void setUser(User user) {
 		this.user = user;
 	}
-
+	public List<Comment> getComments() {
+		return comments;
+	}
+	public void setCommentsList(List<Comment> commentsList) {
+		this.comments = commentsList;
+	}
 	@Override
 	public String toString() {
 		return "Issue: [Id: " + id + ". Date: " + issueDate + ". Name: " + issueName + ". Status: " + issueStatus + ".]";
