@@ -1,0 +1,4 @@
+09-04 16:28:31 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Таблица "ISSUE" не найдена
+Table "ISSUE" not found; SQL statement:
+SELECT * FROM issue  [42102-180]

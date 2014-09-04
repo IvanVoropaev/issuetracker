@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en"
+		xmlns="http://www.w3.org/1999/xhtml" 
+		xmlns:th="http://www.thymeleaf.org" 
+		xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+	<head>
+		<meta charset="utf-8"/>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1"/>
+		<title>Issue</title>
+
+		<!-- Bootstrap -->
+		<link href="css/bootstrap.min.css" th:href="@{/resources/css/bootstrap.min.css}" rel="stylesheet" />
+		<link href="css/bootstrap.min.css" th:href="@{/resources/css/issuetracker.css}" rel="stylesheet" />
+	</head>
+	<body>
+		<div class="container">
+			<div class="bs-example">
+				<div class="panel panel-default">
+					<!-- Default panel contents -->
+					<div class="panel-heading">Create issue</div>
+					<div class="panel-body">
+						
+						<!-- форма для авторизации пользователя с использованием Spring security -->
+						<form class="form-inline" method="post" th:action="@{/security_check}">
+							
+							<!-- сообщение с email-ом пользователя и предложением разлогиниться, появляется только если пользователь авторизирован -->
+							<div sec:authorize="isAuthenticated()">
+								<small>User: <span sec:authentication="name">Bob</span>
+								<a href="index.html" th:href="@{/logout}">Logout</a></small>
+							</div>
+							
+							<!-- поля для авторизации, видны только неавторизированным пользователям -->
+							<div sec:authorize="isAnonymous()">
+								<div class="form-group">
+									<label class="sr-only" for="username_or_email">Email address</label>
+									<input id="username_or_email" name="j_username" type="text" class="form-control" placeholder="Enter email" />
+								</div>
+								<div class="form-group">
+									<label class="sr-only" for="password">Password</label>
+									<input id="password" name="j_password" type="password" class="form-control" placeholder="Password" />
+								</div>
+								<button type="submit" class="btn btn-default">Sign in</button>
+							</div>
+						</form>
+						
+						<br/>
+						
+						<!-- Таблица с информацией о сообщении -->
+						<table style="width:40%">
+							<tr>
+								<td><b>Status</b></td>
+								<td th:text="${issue.issueStatus}">Resolved</td>
+							</tr>
+							<tr>
+								<td><b>Start date</b></td>
+								<td th:text="${#calendars.format(issue.issueDate,'dd/MM/yyyy hh:mm')}">09/01/2010 13:42</td>
+							</tr>
+							<tr>
+								<td><b>Author</b></td>
+								<td th:text="${user.userName}">John Smith</td>
+							</tr>
+						</table>
+						
+						<br/>
+						
+						
+						<dl>
+							<dt>Description</dt>
+							<dd><ul th:text="${issue.issueDescription}">Issue description</ul></dd>
+						</dl>
+						<dl>
+							<dt>Comments</dt>
+						</dl>
+						<div th:each="comment : ${comments}">
+							<table>
+								<tr>
+									<td>
+										<dl>
+											<dt></dt>
+											<dd>Update by <span th:text="${comment.user.userName}"></span> <span th:text="${#calendars.format(comment.commentDate,'dd/MM/yyyy hh:mm')}"></span></dd>
+											<dd><ul><i>Status changed to <span th:text="${comment.commentStatus}"></span></i></ul></dd>
+											<dd th:text="${comment.commentText}">Comment text</dd>
+										</dl>
+									</td>
+								</tr>
+							</table>
+						</div>
+						<div sec:authorize="isAnonymous()"  class="panel-body">
+							<a href="#" th:href="@{/registration}">Sign up</a> for adding issues and leave comments
+						</div>
+						<div class="block" sec:authorize="isAuthenticated()">
+						<dl>
+							<dt>Add comment:</dt>
+						</dl>
+						
+							<!-- форма для добавления комментария -->
+							<form class="form-horizontal" action="#" th:action="@{/addcomment}" th:object="${comment}" method="post">
+								<div class="form-group">
+									<label class="col-sm-2 control-label">Status</label>
+									<div class="col-sm-10">
+										<select class="form-control" th:field="*{commentStatus}">
+											<option value="Resolved">Resolved</option>
+											<option value="Closed">Closed</option>
+										</select>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2 control-label">Author</label>
+									<div class="col-sm-10">
+										<input class="form-control" type="text" readonly="readonly" th:value="${principalUser.userName}" />
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2 control-label">Text</label>
+									<div class="col-sm-10">
+										<textarea class="form-control" rows="3" th:field="*{commentText}"></textarea>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2 control-label"></label>
+									<div class="col-sm-10">
+										<label th:if="${#fields.hasErrors('commentText')}" th:errors="*{commentText}" class="error">may not be empty</label>
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="col-sm-offset-2 col-sm-10">
+										<button type="submit" class="btn btn-default">Add</button>
+									</div>
+								</div>
+							</form>
+							
+						</div>
+					</div>  
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,12 @@
+ul {
+	padding: 0;
+	margin-left: 20px;
+}
+.block {
+	border: solid 1px LightGray; 
+	padding: 10px; 
+}
+.error {
+	color: red;
+	font-size: 12px;
+}
