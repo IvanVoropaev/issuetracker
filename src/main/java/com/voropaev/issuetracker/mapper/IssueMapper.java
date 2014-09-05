@@ -27,6 +27,7 @@ public interface IssueMapper {
 	@Select(SELECT_ALL)
 	@Results(value = {
 		@Result(property="id", column="issue_id"),
+		@Result(property="issueDate", column="issue_date"),
 		@Result(property="issueName", column="issue_name"),
 		@Result(property="issueStatus", column="issue_status"),
 		@Result(property="issueDescription", column="issue_description"),
@@ -40,6 +41,7 @@ public interface IssueMapper {
 	@Select(SELECT_BY_ID)
 	@Results(value = {
 		@Result(property="id", column="issue_id"),
+		@Result(property="issueDate", column="issue_date"),
 		@Result(property="issueName", column="issue_name"),
 		@Result(property="issueStatus", column="issue_status"),
 		@Result(property="issueDescription", column="issue_description"),

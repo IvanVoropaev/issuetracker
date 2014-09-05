@@ -1,62 +1,63 @@
 package com.voropaev.issuetracker.mapper;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.assertTrue;
 
-import org.junit.Ignore;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.transaction.TransactionConfiguration;
 
 import com.voropaev.issuetracker.config.TestConfig;
 import com.voropaev.issuetracker.domain.User;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = { TestConfig.class} )
-@TransactionConfiguration(transactionManager = "transactionManager", defaultRollback = true)
-public class UserMapperTest {
+//@TransactionConfiguration(transactionManager = "transactionManager", defaultRollback = true)
+public class UserMapperTest extends AbstractTransactionalJUnit4SpringContextTests {
 	
 	@Autowired
 	UserMapper userMapper;
 	
+	private Integer id = 1;
 	private String userName = "username";
-	private String userEmail = "email@email.com";
+	private String userEmail = "mail@mail.com";
 	private String password = "password";
+	
+	private User user;
 
-	/*@Before
+	@Before
 	public void setUp() throws Exception {
-		User user = new User();
-	}*/
-
-	/*@After
-	public void tearDown() throws Exception {
-	}*/
+		user = new User();
+		user.setId(id);
+		user.setUserName(userName);
+		user.setUserEmail(userEmail);
+		user.setPassword(password);	
+	}
 
 	@Test
 	public void testInsertUser() {
-		User user = new User();
-		user.setUserName(userName);
-		user.setUserEmail(userEmail);
-		user.setPassword(password);
+		/*Date date = new Date();
+		System.out.println(new Timestamp(date.getTime()));*/
+		int before = countRowsInTable("users");
 		userMapper.insertUser(user);
-		User userByEmail = userMapper.getUserByEmail(userEmail);
-		assertEquals(user, userByEmail);
-		fail("Not yet implemented");
+		int after = countRowsInTable("users");
+		assertTrue((before + 1) == after);
 	}
 	
-	@Ignore
 	@Test
 	public void testGetUserById() {
-		fail("Not yet implemented");
+		User userById = userMapper.getUserById(user.getId());
+		assertEquals(user, userById);
 	}
 	
-	@Ignore
 	@Test
 	public void testGetUserByEmail() {
-		fail("Not yet implemented");
+		User userByEmail = userMapper.getUserByEmail(user.getUserEmail());
+		assertEquals(user, userByEmail);
 	}
 
 }

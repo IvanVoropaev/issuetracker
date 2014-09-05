@@ -59,6 +59,21 @@ public class Issue implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Issue: [Id: " + id + ". Date: " + issueDate + ". Name: " + issueName + ". Status: " + issueStatus + ".]";
+		return "Issue: [Id: " + id + ". Date: " + issueDate + ". Name: " + issueName + ". Status: " + issueStatus + ". Description: " + issueDescription + ". User.id: " + user.getId() + ".]";
+	}
+	
+	@Override
+	public boolean equals(Object obj){
+	    if (this == obj)
+	        return true;
+	    if (!(obj instanceof Issue))
+	        return false;
+	    Issue issue = (Issue) obj;
+	    return ((id == issue.getId()) 
+	    		&& (issueDate.equals(issue.getIssueDate())) 
+	    		&& (issueDescription.equals(issue.getIssueDescription()))
+	    		&& (issueName.equals(issue.getIssueName()))
+	    		&& (issueStatus.equals(issue.getIssueStatus()))
+	    		&& (user.getId() == issue.getUser().getId()));
 	}
 }

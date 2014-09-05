@@ -59,4 +59,19 @@ public class Comment implements Serializable {
 	public String toString() {
 		return "Comment: + [Id: " + id + ". Date: " + commentDate + ". Text: " + commentText + ".]";
 	}
+	
+	@Override
+	public boolean equals(Object obj){
+	    if (this == obj)
+	        return true;
+	    if (!(obj instanceof Comment))
+	        return false;
+	    Comment comment = (Comment) obj;
+	    return ((id == comment.getId())
+	    		&& (issue.getId() == comment.getIssue().getId())
+	    		&& (user.getId() == comment.getUser().getId())
+	    		&& (commentDate.equals(comment.getCommentDate()))
+	    		&& (commentStatus.equals(comment.getCommentStatus()))
+	    		&& (commentText.equals(comment.getCommentText())));
+	}
 }

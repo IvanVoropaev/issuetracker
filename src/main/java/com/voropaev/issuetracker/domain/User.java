@@ -70,4 +70,17 @@ public class User implements Serializable {
 		return "User: [Id: " + id + ". Name: " + userName + ". Email: " + userEmail + ".]";
 	}
 	
+	@Override
+	public boolean equals(Object obj){
+	    if (this == obj)
+	        return true;
+	    if (!(obj instanceof User))
+	        return false;
+	    User user = (User)obj;
+	    return ((id == user.getId()) 
+	    		&& (userName.equals(user.getUserName())) 
+	    		&& (userEmail.equals(user.getUserEmail())) 
+	    		&& (password.equals(user.getPassword())));
+	}
+	
 }

@@ -1,9 +1,5 @@
 package com.voropaev.issuetracker.config;
 
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
-
 import javax.sql.DataSource;
 
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -30,25 +26,11 @@ public class TestDataConfig {
 	}*/
 	
 	@Bean
-    public DataSource dataSource() {
-		
-		/*PrintWriter writer;
-		try {
-			writer = new PrintWriter("C:/springsource/workspace/issuetracker/src/test/resources/uyfgv.txt", "UTF-8");
-			writer.println("The first line");
-			writer.println("The second line");
-			writer.close();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}*/
-		
+    public DataSource dataSource() {		
         return new EmbeddedDatabaseBuilder()
             .setType(EmbeddedDatabaseType.H2)
-            .addScript("C:/springsource/workspace/issuetracker/src/test/resources/testshema.sql")
+            .addScript("classpath:testshema.sql")
+            .addScript("classpath:testdata.sql")
             .build();
     }
 	
