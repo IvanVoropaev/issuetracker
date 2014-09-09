@@ -77,7 +77,15 @@ public class IssueMapperTest extends AbstractTransactionalJUnit4SpringContextTes
 	}
 	
 	@Test
-	public void GetIssueById() {
+	public void testGetIssueById() {
+		Issue issueById = issueMapper.getIssueById(issue.getId());
+		assertEquals(issue, issueById);
+	}
+	
+	@Test
+	public void testUpdateIssueStatus() {
+		issue.setIssueStatus("newstatus");
+		issueMapper.updateIssueStatus(issue);
 		Issue issueById = issueMapper.getIssueById(issue.getId());
 		assertEquals(issue, issueById);
 	}

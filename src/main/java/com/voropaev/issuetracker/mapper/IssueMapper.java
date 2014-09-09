@@ -20,7 +20,7 @@ public interface IssueMapper {
 	final String INSERT = "INSERT INTO issue (user_id,issue_name,issue_date,issue_status,issue_description)"
 							+ "VALUES (#{user.id},#{issueName},#{issueDate},#{issueStatus},#{issueDescription})";
 	final String SELECT_BY_ID = "SELECT * FROM issue WHERE issue_id = #{id}";
-	final String UPDATE = "UPDATE issue"
+	final String UPDATE = "UPDATE issue "
 							+ "SET issue_status = #{issueStatus}"
 							+ "WHERE issue_id = #{id}";	
 	
