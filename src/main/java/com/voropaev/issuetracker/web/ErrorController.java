@@ -1,13 +1,15 @@
 package com.voropaev.issuetracker.web;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.multiaction.NoSuchRequestHandlingMethodException;
 
 @Controller
 public class ErrorController {
 
-	@RequestMapping(value = "/page-not-found")
+	//@RequestMapping(value = "/page-not-found")
+	@ExceptionHandler(NoSuchRequestHandlingMethodException.class)
 	public ModelAndView pageNotFound() {
 		ModelAndView model = new ModelAndView();
 		model.addObject("message", "Page not found");
@@ -15,7 +17,8 @@ public class ErrorController {
 		return model;
 	}
 	
-	@RequestMapping(value = "/uncaught-error")
+	//@RequestMapping(value = "/uncaught-error")
+	@ExceptionHandler(java.lang.Exception.class)
 	public ModelAndView uncaughtError() {
 		ModelAndView model = new ModelAndView();
 		model.addObject("message", "Unknown error");

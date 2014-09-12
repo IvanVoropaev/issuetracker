@@ -64,9 +64,14 @@ public class IssueController {
 	public ModelAndView showAddIssueForm(ModelAndView model, Principal principal) {
 		
 		if(principal==null) {
+			
+			System.out.println("My test 1 here");
+			
 			String message = "You must loggin in before you can add issue";
 			model.addObject("message", message);
 			model.setViewName("errors/error");
+			
+			System.out.println(model.getModel().size());
 			return model;
 		}
 

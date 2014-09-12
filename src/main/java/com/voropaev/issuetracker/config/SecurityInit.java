@@ -8,4 +8,9 @@ public class SecurityInit extends AbstractSecurityWebApplicationInitializer {
 	    System.out.println("afterSpringSecurityFilterChain");
 	    super.afterSpringSecurityFilterChain(servletContext);
 	}*/
+	
+	/*@Override
+    protected void beforeSpringSecurityFilterChain(ServletContext servletContext) {
+        insertFilters(servletContext, new MultipartFilter());
+    }*/
 }

@@ -19,8 +19,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	private static final Logger logger = LoggerFactory.getLogger(SecurityConfig.class);
 	
-	
-	
 	@Override
     protected void configure(HttpSecurity http) throws Exception {
         http
@@ -30,8 +28,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         		.loginPage("/login.html") // default is /login with an HTTP get
         		.failureUrl("/login-error") // default is /login-error
         		.loginProcessingUrl("/security_check") // default is /login with an HTTP post
+        		//.defaultSuccessUrl("/")
         	.and()
-        		.logout().logoutSuccessUrl("/logout")
+        		.logout().logoutSuccessUrl("/")
+        	.and()
+        		.rememberMe().key("securityCheck").tokenValiditySeconds(86400)
         	.and()
         		.csrf().disable();
         
